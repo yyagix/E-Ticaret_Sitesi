@@ -1,0 +1,10 @@
+﻿@model CardViewModel
+
+<a href="/Card/Index" class="btn border">
+    <i class="fas fa-shopping-basket text-primary"></i>
+    <span class="badge">Sepet</span>
+</a>
+<a href="" class="btn border">
+    <i class="fas fa-cart-arrow-down text-primary"></i>
+    <span class="badge">@Model.GrandTotal.ToString("c")</span>
+</a>

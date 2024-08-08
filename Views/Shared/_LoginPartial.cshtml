@@ -1,0 +1,29 @@
+﻿@using Microsoft.AspNetCore.Identity
+@inject SignInManager<AppUser> SignInManager
+@inject UserManager<AppUser> UsersManager
+
+@if (SignInManager.IsSignedIn(User))
+{
+    var user = UsersManager.GetUserAsync(User).Result;
+    <a href="/MyAccount/Index" class="btn border">
+        <i class="fas fa-user text-primary"></i>
+        <span class="badge">  @user.FirstName @user.LastName</span>
+    </a>
+    <a href="/Logout/Index" class="btn border">
+        <i class="fas fa-sign-out-alt text-primary"></i>
+        <span class="badge">Güvenli Çıkış</span>
+    </a>
+}
+else
+{
+    <a href="/Login/Index" class="btn border">
+        <i class="fas fa-sign-in-alt text-primary"></i>
+        <span class="badge">Giriş</span>
+    </a>
+    <a href="/Register/Index" class="btn border">
+        <i class="fas fa-user-plus text-primary"></i>
+        <span class="badge">Kayıt Ol</span>
+    </a>
+}
+
+@await Component.InvokeAsync("CardSumList")

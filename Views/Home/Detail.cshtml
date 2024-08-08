@@ -1,0 +1,124 @@
+﻿@model Products
+
+@{
+    ViewData["Title"] = "Detay";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!-- Page Header Start -->
+<div class="container-fluid bg-secondary mb-5">
+    <div class="d-flex flex-column align-items-center justify-content-center" style="min-height: 300px">
+        <h1 class="font-weight-semi-bold text-uppercase mb-3">Ürün Detay</h1>
+        <div class="d-inline-flex">
+            <p class="m-0"><a href="/Home">Anasayfa</a></p>
+            <p class="m-0 px-2">-</p>
+            <p class="m-0">Ürün Detay</p>
+        </div>
+    </div>
+</div>
+<!-- Page Header End -->
+<!-- Shop Detail Start -->
+<div class="container-fluid py-5">
+    <div class="row px-xl-5">
+        <div class="col-lg-5 pb-5">
+            <div id="product-carousel" class="carousel slide" data-ride="carousel">
+                <div class="carousel-inner border">
+                    <div class="carousel-item active">
+                        <img class="d-block w-100 product-img" src="/Urunler/@Model.ProductPicture" alt="Image">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-7 pb-5">
+            <h3 class="font-weight-semi-bold">@Model.ProductName</h3>
+            <div class="d-flex mb-3">
+                <div class="text-primary mr-2">
+                    <small class="fas fa-star"></small>
+                    <small class="fas fa-star"></small>
+                    <small class="fas fa-star"></small>
+                    <small class="fas fa-star"></small>
+                    <small class="fas fa-star-half-alt"></small>
+                </div>
+                <small class="pt-1">(Onaylı Ürün)</small>
+            </div>
+            <h3 class="font-weight-semi-bold mb-4">@Model.ProductPrice.ToString("c")</h3>
+
+            <div class="d-flex align-items-center mb-4 pt-2">
+                <div class="mb-4">
+                    <div>
+                        <a href="/Card/Add/@Model.ProductId" class="btn btn-primary px-4">
+                            <i class="fa fa-shopping-cart mr-2"></i> Sepete Ekle
+                        </a>
+                    </div>
+                    <div class="mt-3">
+                        <a href="/Card/Index" class="btn btn-primary px-4">
+                            <i class="fa fa-shopping-cart mr-2"></i> Sepet Listesini Gör
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row px-xl-5">
+        <div class="col">
+            <div class="nav nav-tabs justify-content-center border-secondary mb-4">
+                <a class="nav-item nav-link active" data-toggle="tab" href="#tab-pane-1">Ürün Açıklaması</a>
+            </div>
+            <div class="tab-content">
+                <div class="tab-pane fade show active" id="tab-pane-1">
+                    <h4 class="mb-3">Ürün Açıklaması</h4>
+                    <p class="parea">@Html.Raw(Model.ProductDescription)</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Shop Detail End -->
+<!-- Modal for Viewing Image -->
+<div class="modal fade" id="imageModal" tabindex="-1" role="dialog" aria-labelledby="imageModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-body">
+                <img id="modalImage" src="" class="img-fluid" />
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        document.querySelectorAll('#product-carousel .carousel-item img').forEach(function (img) {
+            img.addEventListener('click', function () {
+                document.getElementById('modalImage').src = img.src;
+                $('#imageModal').modal('show');
+            });
+        });
+    });
+</script>
+
+<style>
+    .carousel-item img {
+        height: 500px; 
+        object-fit: cover;
+        cursor: pointer; 
+    }
+
+    .modal-content {
+        border: none; 
+    }
+
+    .modal-body {
+        padding: 0; 
+    }
+
+        .modal-body img {
+            width: 100%; 
+            height: auto; 
+        }
+
+    .parea{
+        white-space: pre-wrap
+    }
+</style>

@@ -1,0 +1,52 @@
+﻿@model ProductApp.Models.Slider
+
+@{
+    ViewData["Title"] = "Sil";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h1 class="mb-4">Sil</h1>
+
+<h3>Bu slider'ı silmek istediğinizden emin misiniz?</h3>
+<div>
+    <h4>Slider</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.SliderName)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.SliderName)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Header1)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Header1)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Header2)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Header2)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Context)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Context)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.SliderImage)
+        </dt>
+        <dd class="col-sm-10">
+            <img src="/Slider/@Model.SliderImage" width="100px" height="100px" alt="Slider Resmi" />
+        </dd>
+    </dl>
+
+    <form asp-action="Delete">
+        <input type="hidden" asp-for="SliderId" />
+        <input type="submit" value="Sil" class="btn btn-danger" />
+        <a asp-action="Index" class="btn btn-secondary">Listeye Dön</a>
+    </form>
+</div>

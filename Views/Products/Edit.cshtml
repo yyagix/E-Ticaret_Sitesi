@@ -1,0 +1,86 @@
+﻿@model ProductApp.Models.Products
+
+@{
+    ViewData["Title"] = "Ürünü Düzenle";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h1>Ürünü Düzenle</h1>
+
+<h4>Ürün Bilgileri</h4>
+<hr />
+<div class="row">
+    <div class="col-md-8">
+        <form asp-action="Edit" enctype="multipart/form-data">
+            <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+            <input type="hidden" asp-for="ProductId" />
+
+            <!-- Ürün Adı -->
+            <div class="form-group">
+                <label asp-for="ProductName" class="control-label">Ürün Adı</label>
+                <input asp-for="ProductName" class="form-control" />
+                <span asp-validation-for="ProductName" class="text-danger"></span>
+            </div>
+
+            <!-- Ürün Kodu -->
+            <div class="form-group">
+                <label asp-for="ProductCode" class="control-label">Ürün Kodu</label>
+                <input asp-for="ProductCode" class="form-control" />
+                <span asp-validation-for="ProductCode" class="text-danger"></span>
+            </div>
+
+            <!-- Ürün Açıklaması -->
+            <div class="form-group">
+                <label asp-for="ProductDescription" class="control-label">Ürün Açıklaması</label>
+                <textarea asp-for="ProductDescription" class="form-control"></textarea>
+                <span asp-validation-for="ProductDescription" class="text-danger"></span>
+            </div>
+
+            <!-- Ürün Fiyatı -->
+            <div class="form-group">
+                <label asp-for="ProductPrice" class="control-label">Ürün Fiyatı</label>
+                <input asp-for="ProductPrice" class="form-control" />
+                <span asp-validation-for="ProductPrice" class="text-danger"></span>
+            </div>
+
+            <!-- Ürün Kategorisi -->
+            <div class="form-group">
+                <label asp-for="CategoryId" class="control-label">Ürün Kategorisi</label>
+                <select asp-for="CategoryId" class="form-control" asp-items="ViewBag.kateListe"></select>
+                <span asp-validation-for="CategoryId" class="text-danger"></span>
+            </div>
+
+            <!-- Mevcut Ürün Resmi -->
+            @if (!string.IsNullOrEmpty(Model.ProductPicture))
+            {
+                <div class="form-group">
+                    <label>Mevcut Resim:</label>
+                    <div class="mb-3">
+                        <img src="~/Urunler/@Model.ProductPicture" class="img-thumbnail" alt="Ürün Resmi" style="max-width: 150px; height: auto;" />
+                    </div>
+                </div>
+            }
+
+            <!-- Resim Yükleme -->
+            <div class="form-group">
+                <label asp-for="ImageUpload" class="control-label">Yeni Resim Yükle</label>
+                <input asp-for="ImageUpload" type="file" class="form-control" />
+                <span asp-validation-for="ImageUpload" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <input type="submit" value="Kaydet" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index" class="btn btn-secondary">Listeye Dön</a>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

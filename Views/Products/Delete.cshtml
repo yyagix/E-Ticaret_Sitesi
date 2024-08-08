@@ -1,0 +1,66 @@
+﻿@model ProductApp.Models.Products
+
+@{
+    ViewData["Title"] = "Sil";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h1 class="mb-4">Sil</h1>
+
+<h3 class="mb-4">Bu ürünü silmek istediğinizden emin misiniz?</h3>
+
+<div class="mb-4">
+    <h4>Ürün Bilgileri</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-3">
+            @Html.DisplayNameFor(model => model.ProductName)
+        </dt>
+        <dd class="col-sm-9">
+            @Html.DisplayFor(model => model.ProductName)
+        </dd>
+        <dt class="col-sm-3">
+            @Html.DisplayNameFor(model => model.ProductCode)
+        </dt>
+        <dd class="col-sm-9">
+            @Html.DisplayFor(model => model.ProductCode)
+        </dd>
+        <dt class="col-sm-3">
+            @Html.DisplayNameFor(model => model.ProductDescription)
+        </dt>
+        <dd class="col-sm-9">
+            @Html.DisplayFor(model => model.ProductDescription)
+        </dd>
+        <dt class="col-sm-3">
+            @Html.DisplayNameFor(model => model.ProductPicture)
+        </dt>
+        <dd class="col-sm-9">
+            @if (!string.IsNullOrEmpty(Model.ProductPicture))
+            {
+                <img src="/Urunler/@Model.ProductPicture" class="img-thumbnail" width="150" height="150" alt="Ürün Resmi" />
+            }
+            else
+            {
+                <span>Resim Yok</span>
+            }
+        </dd>
+        <dt class="col-sm-3">
+           @Html.DisplayNameFor(model => model.ProductPrice)
+        </dt>
+        <dd class="col-sm-9">
+           ₺ @Html.DisplayFor(model => model.ProductPrice)
+        </dd>
+        <dt class="col-sm-3">
+            @Html.DisplayNameFor(model => model.Category)
+        </dt>
+        <dd class="col-sm-9">
+            @Html.DisplayFor(model => model.Category.CategoryName)
+        </dd>
+    </dl>
+</div>
+
+<form asp-action="Delete" method="post" class="mb-4">
+    <input type="hidden" asp-for="ProductId" />
+    <button type="submit" class="btn btn-danger">Sil</button>
+    <a asp-action="Index" class="btn btn-secondary">Listeye Dön</a>
+</form>

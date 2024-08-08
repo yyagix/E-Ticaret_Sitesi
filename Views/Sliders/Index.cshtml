@@ -1,0 +1,43 @@
+﻿@model IEnumerable<ProductApp.Models.Slider>
+
+@{
+    ViewData["Title"] = "Sliderlar";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h1 class="mb-4">Slider Listesi</h1>
+
+<p>
+    <a asp-action="Create" class="btn btn-primary">Yeni Slider Ekle</a>
+</p>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>@Html.DisplayNameFor(model => model.SliderName)</th>
+            <th>@Html.DisplayNameFor(model => model.Header1)</th>
+            <th>@Html.DisplayNameFor(model => model.Header2)</th>
+            <th>@Html.DisplayNameFor(model => model.Context)</th>
+            <th>@Html.DisplayNameFor(model => model.SliderImage)</th>
+            <th>İşlemler</th>
+        </tr>
+    </thead>
+    <tbody class="align-middle justify-content-center">
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td class="align-middle">@Html.DisplayFor(modelItem => item.SliderName)</td>
+                <td class="align-middle">@Html.DisplayFor(modelItem => item.Header1)</td>
+                <td class="align-middle">@Html.DisplayFor(modelItem => item.Header2)</td>
+                <td class="align-middle">@Html.DisplayFor(modelItem => item.Context)</td>
+                <td class="align-middle">
+                    <img src="/Slider/@item.SliderImage" width="150px" height="100px" alt="Slider Resmi" />
+                </td>
+                <td class="align-middle">
+                    <a asp-action="Edit" asp-route-id="@item.SliderId" class="btn btn-warning btn-sm">Düzenle</a> |
+                    <a asp-action="Details" asp-route-id="@item.SliderId" class="btn btn-info btn-sm">Detaylar</a> |
+                    <a asp-action="Delete" asp-route-id="@item.SliderId" class="btn btn-danger btn-sm">Sil</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

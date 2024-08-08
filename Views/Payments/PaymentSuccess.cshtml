@@ -1,0 +1,64 @@
+﻿@model CardViewModel
+
+@{
+    ViewData["Title"] = "Ödeme Onayı";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ödeme Onayı</title>
+</head>
+
+<body>
+    <div class="container my-5">
+        @if (TempData["ErrorMessage"] != null)
+        {
+            <div class="alert alert-danger">
+                @TempData["ErrorMessage"]
+            </div>
+        }
+        <div class="row">
+            <div class="col-lg-8 mx-auto">
+                <div class="card p-4 text-center">
+                    <h2>Ödemeniz Onaylandı!</h2>
+                    <p>Teşekkürler, @ViewBag.FirstName.</p>
+                    <a href="/Home">Ana Sayfaya Dön</a>
+                </div>
+            </div>
+        </div>
+        <table class="table table-bordered text-center mb-0 mt-5">
+            <thead class="bg-secondary text-dark">
+                <tr>
+                    <th>Ürün</th>
+                    <th>Adet</th>
+                </tr>
+            </thead>
+            <tbody class="align-middle">
+                @foreach (var item in Model.CardItems)
+                {
+                    <tr>
+                        <td class="align-middle"><a href="/Home/Detail/@item.ProductId">@item.ProductName</a><br /><img src="/Urunler/@item.Image" alt="" style="width: 50px;"></td>
+                        <td class="align-middle">
+                            <div class="input-group quantity mx-auto" style="width: 150px;">
+                                <input type="text" class="form-control form-control-sm bg-secondary text-center" value="@item.Quantity" readonly>
+                            </div>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+        <div class="card-footer border-secondary bg-transparent">
+            <div class="d-flex justify-content-between mt-2">
+                <h5 class="font-weight-bold">Toplam Fiyat</h5>
+                <h5 class="font-weight-bold">@Model.GrandTotal.ToString("c")</h5>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
